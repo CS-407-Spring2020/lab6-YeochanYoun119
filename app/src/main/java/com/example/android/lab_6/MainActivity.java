@@ -50,6 +50,8 @@ public class MainActivity extends FragmentActivity {
             mFusedLocationProviderClient.getLastLocation().addOnCompleteListener(this, task -> {
                 Location mLastKnownLocation = task.getResult();
                 if (task.isSuccessful() && mLastKnownLocation != null){
+                    LatLng mLastKnownLocationLatLng = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
+                    mMap.addMarker(new MarkerOptions().position(mLastKnownLocationLatLng).title("Current Location"));
                     mMap.addPolyline(new PolylineOptions().add(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()),mDestinationLatLng));
                 }
             });
